@@ -1,6 +1,7 @@
 package com.example.simplytechnologiesproject
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -8,7 +9,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,6 +21,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.Column
+import androidx.compose.ui.res.stringResource
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,27 +37,27 @@ fun SetupBottomNavigation() {
             BottomNavigationBar(
                 items = listOf(
                     BottomNavItem(
-                        name = "Home",
+                        name = stringResource(R.string.home),
                         route = "home",
                         icon = ImageVector.vectorResource(id = R.drawable.home) //Icons.Default.Home TODO: fix icon
                     ),
                     BottomNavItem(
-                        name = "Vehicle",
+                        name = stringResource(R.string.vehicle),
                         route = "vehicle",
                         icon = ImageVector.vectorResource(id = R.drawable.vehicle)
                     ),
                     BottomNavItem(
-                        name = "Map",
+                        name = stringResource(R.string.map),
                         route = "map",
                         icon = ImageVector.vectorResource(id = R.drawable.map)
                     ),
                     BottomNavItem(
-                        name = "Support",
+                        name = stringResource(R.string.support),
                         route = "support",
                         icon = ImageVector.vectorResource(id = R.drawable.support)
                     ),
                     BottomNavItem(
-                        name = "Settings",
+                        name = stringResource(R.string.settings),
                         route = "settings",
                         icon = ImageVector.vectorResource(id = R.drawable.settings)
                     ),
@@ -87,11 +95,50 @@ fun Navigation(navController: NavHostController) {
 
 @Composable
 fun HomeScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = "Home")
+    Surface(color = colorResource(id = R.color.gray_light)) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+                Image(
+                    painter = painterResource(id = R.drawable.morning),
+                    contentDescription = "Top Image",
+                    contentScale = ContentScale.FillWidth,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.TopCenter)
+                )
+            }
+
+            Box(modifier = Modifier
+                .fillMaxSize(),
+                contentAlignment = Alignment.TopCenter) {
+                Column(verticalArrangement = Arrangement.SpaceAround,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp)) {
+                    SetupTopView()
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Box{
+                            SetupInfoView()
+                        }
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.TopCenter
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.car),
+                                contentDescription = "Image",
+                                contentScale = ContentScale.FillWidth,
+                                modifier = Modifier.fillMaxWidth().offset(y = 100.dp)
+                            )
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -101,7 +148,7 @@ fun VehicleScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Vehicle")
+        Text(text = stringResource(R.string.vehicle))
     }
 }
 
@@ -111,7 +158,7 @@ fun MapScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Map")
+        Text(text = stringResource(R.string.map))
     }
 }
 
@@ -121,7 +168,7 @@ fun SupportScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Support")
+        Text(text = stringResource(R.string.support))
     }
 }
 
@@ -132,7 +179,7 @@ fun SettingsScreen() {
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "Settings")
+        Text(text = stringResource(R.string.settings))
     }
 }
 

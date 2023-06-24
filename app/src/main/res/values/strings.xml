@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">SimplyTechnologiesProject</string>
+    <string name="my_nissan_ariya">MY NISSAN ARIYA</string>
+    <string name="est_range">Est. Range</string>
+    <string name="mi">mi</string>
+    <string name="weather_info"> 70° • Irvine, CA</string>
+    <string name="lock">Lock</string>
+    <string name="unlock">Unlock</string>
+    <string name="climate">Climate</string>
+    <string name="charge">Change</string>
+    <string name="lights">Lights</string>
+    <string name="home">Home</string>
+    <string name="vehicle">Vehicle</string>
+    <string name="map">Map</string>
+    <string name="support">Support</string>
+    <string name="settings">Settings</string>
 </resources>
