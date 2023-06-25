@@ -14,4 +14,10 @@
     <string name="map">Map</string>
     <string name="support">Support</string>
     <string name="settings">Settings</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="this_action_will_unlock">This action will remotely unlock your vehicle.</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="waking_ariya_yo_unlock">Waking Ariya to unlock...</string>
+    <string name="ariya_unlocked">Ariya unlocked</string>
 </resources>

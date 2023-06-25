@@ -1,7 +1,6 @@
 package com.example.simplytechnologiesproject
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -9,28 +8,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.Column
-import androidx.compose.ui.res.stringResource
+import com.example.simplytechnologiesproject.screen.home.HomeScreen
+import com.example.simplytechnologiesproject.screen.map.MapScreen
+import com.example.simplytechnologiesproject.screen.settings.SettingsScreen
+import com.example.simplytechnologiesproject.screen.support.SupportScreen
+import com.example.simplytechnologiesproject.screen.vehicle.VehicleScreen
+import com.example.simplytechnologiesproject.viewmodel.HomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetupBottomNavigation() {
+fun SetupBottomNavigation(viewModel: HomeViewModel = viewModel()) {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -76,113 +74,24 @@ fun SetupBottomNavigation() {
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen()
+            HomeScreen(colorId = R.color.gray_light,
+                    drawableBackgroundId = R.drawable.morning,
+                    drawableCarId = R.drawable.car)
         }
         composable("vehicle") {
-            VehicleScreen()
+            VehicleScreen(modifier = Modifier.fillMaxSize(),R.string.vehicle)
         }
         composable("map") {
-            MapScreen()
+            MapScreen(modifier = Modifier.fillMaxSize(),R.string.map)
         }
         composable("support") {
-            SupportScreen()
+            SupportScreen(modifier = Modifier.fillMaxSize(), R.string.support)
         }
         composable("settings") {
-            SettingsScreen()
+            SettingsScreen(modifier = Modifier.fillMaxSize(), R.string.settings)
         }
     }
 }
-
-@Composable
-fun HomeScreen() {
-    Surface(color = colorResource(id = R.color.gray_light)) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
-                Image(
-                    painter = painterResource(id = R.drawable.morning),
-                    contentDescription = "Top Image",
-                    contentScale = ContentScale.FillWidth,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(Alignment.TopCenter)
-                )
-            }
-
-            Box(modifier = Modifier
-                .fillMaxSize(),
-                contentAlignment = Alignment.TopCenter) {
-                Column(verticalArrangement = Arrangement.SpaceAround,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp)) {
-                    SetupTopView()
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        Box{
-                            SetupInfoView()
-                        }
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.TopCenter
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.car),
-                                contentDescription = "Image",
-                                contentScale = ContentScale.FillWidth,
-                                modifier = Modifier.fillMaxWidth().offset(y = 100.dp)
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun VehicleScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = stringResource(R.string.vehicle))
-    }
-}
-
-@Composable
-fun MapScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = stringResource(R.string.map))
-    }
-}
-
-@Composable
-fun SupportScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = stringResource(R.string.support))
-    }
-}
-
-
-@Composable
-fun SettingsScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(text = stringResource(R.string.settings))
-    }
-}
-
 
 @Composable
 fun BottomNavigationBar(
@@ -228,12 +137,15 @@ fun BottomNavigationBar(
                         Icon(
                             imageVector = item.icon,
                             contentDescription = item.name,
-                            tint = if (selected) colorResource(id = R.color.blue) else colorResource(id = R.color.gray)
+                            tint = if (selected) colorResource(id = R.color.blue) else colorResource(
+                                id = R.color.gray
+                            )
                         );
                         Text(
                             text = item.name,
                             modifier = Modifier.padding(top = 5.dp),
-                            fontSize = 12.sp)
+                            fontSize = 12.sp
+                        )
                     }
                 }
             )
