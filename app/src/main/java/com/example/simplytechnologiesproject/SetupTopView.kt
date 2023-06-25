@@ -14,31 +14,34 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SetupTopView() {
-        //TODO:make status bar transparent
-        Row(horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.fillMaxWidth().padding(top = 10.dp) ) {
-            val imagePainter = painterResource(id = R.drawable.support)
-            val colorFilter = ColorFilter.tint(Color.Black)
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 10.dp)
+    ) {
+        val imagePainter = painterResource(id = R.drawable.support)
+        val colorFilter = ColorFilter.tint(Color.Black)
+        Image(
+            modifier = Modifier,
+            painter = imagePainter,
+            contentDescription = "Image",
+            colorFilter = colorFilter
+        )
+        Row {
             Image(
-                modifier = Modifier,
-                painter = imagePainter,
+                modifier = Modifier.align(CenterVertically),
+                painter = painterResource(id = R.drawable.lock),
                 contentDescription = "Image",
                 colorFilter = colorFilter
             )
-            Row {
-                Image(
-                    modifier = Modifier.align(CenterVertically),
-                    painter = painterResource(id = R.drawable.lock),
-                    contentDescription = "Image",
-                    colorFilter = colorFilter
-                )
-                Text(text = stringResource(R.string.my_nissan_ariya))
-            }
-            Image(
-                modifier = Modifier,
-                painter = painterResource(id = R.drawable.notifications),
-                contentDescription = "Image",
-                colorFilter = colorFilter
-            )
+            Text(text = stringResource(R.string.my_nissan_ariya))
         }
+        Image(
+            modifier = Modifier,
+            painter = painterResource(id = R.drawable.notifications),
+            contentDescription = "Image",
+            colorFilter = colorFilter
+        )
+    }
 }

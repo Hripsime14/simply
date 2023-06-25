@@ -18,16 +18,27 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun SetupInfoView() {
     Column(modifier = Modifier.padding(top = 20.dp, start = 20.dp)) {
-        Text(text = stringResource(R.string.est_range), color = colorResource(id = R.color.gray), fontWeight = FontWeight.SemiBold)
+        Text(
+            text = stringResource(R.string.est_range),
+            color = colorResource(id = R.color.gray),
+            fontWeight = FontWeight.SemiBold
+        )
         Row {
             Text(text = "120", fontSize = 40.sp, fontWeight = FontWeight.Bold)
-            Text(text = " mi", fontSize = 18.sp, modifier = Modifier.align(Alignment.Bottom).padding(bottom = 6.dp))
+            Text(
+                text = " mi",
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .align(Alignment.Bottom)
+                    .padding(bottom = 6.dp)
+            )
         }
         Row(modifier = Modifier.padding(top = 15.dp)) {
             Image(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 painter = painterResource(id = R.drawable.weather),
-                contentDescription = "Image")
+                contentDescription = "Image"
+            )
             Text(text = stringResource(R.string.weather_info), fontWeight = FontWeight.SemiBold)
         }
     }

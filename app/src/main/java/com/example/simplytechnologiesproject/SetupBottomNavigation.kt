@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -23,12 +22,11 @@ import com.example.simplytechnologiesproject.screen.map.MapScreen
 import com.example.simplytechnologiesproject.screen.settings.SettingsScreen
 import com.example.simplytechnologiesproject.screen.support.SupportScreen
 import com.example.simplytechnologiesproject.screen.vehicle.VehicleScreen
-import com.example.simplytechnologiesproject.viewmodel.HomeViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SetupBottomNavigation(viewModel: HomeViewModel = viewModel()) {
+fun SetupBottomNavigation() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
@@ -37,7 +35,7 @@ fun SetupBottomNavigation(viewModel: HomeViewModel = viewModel()) {
                     BottomNavItem(
                         name = stringResource(R.string.home),
                         route = "home",
-                        icon = ImageVector.vectorResource(id = R.drawable.home) //Icons.Default.Home TODO: fix icon
+                        icon = ImageVector.vectorResource(id = R.drawable.home)
                     ),
                     BottomNavItem(
                         name = stringResource(R.string.vehicle),
@@ -74,15 +72,17 @@ fun SetupBottomNavigation(viewModel: HomeViewModel = viewModel()) {
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            HomeScreen(colorId = R.color.gray_light,
-                    drawableBackgroundId = R.drawable.morning,
-                    drawableCarId = R.drawable.car)
+            HomeScreen(
+                colorId = R.color.gray_light,
+                drawableBackgroundId = R.drawable.morning,
+                drawableCarId = R.drawable.car
+            )
         }
         composable("vehicle") {
-            VehicleScreen(modifier = Modifier.fillMaxSize(),R.string.vehicle)
+            VehicleScreen(modifier = Modifier.fillMaxSize(), R.string.vehicle)
         }
         composable("map") {
-            MapScreen(modifier = Modifier.fillMaxSize(),R.string.map)
+            MapScreen(modifier = Modifier.fillMaxSize(), R.string.map)
         }
         composable("support") {
             SupportScreen(modifier = Modifier.fillMaxSize(), R.string.support)
@@ -109,10 +109,10 @@ fun BottomNavigationBar(
         items.forEach { item ->
             val selected = item.route == backStackEntry.value?.destination?.route
             NavigationBarItem(
-                selected = selected,//navController.currentDestination?.route,
+                selected = selected,
                 colors = NavigationBarItemDefaults
                     .colors(
-                        selectedIconColor = colorResource(id = R.color.blue),//40A0DA
+                        selectedIconColor = colorResource(id = R.color.blue),
                         unselectedIconColor = colorResource(id = R.color.gray),
                         indicatorColor = Color.White
                     ),
@@ -121,19 +121,6 @@ fun BottomNavigationBar(
                 },
                 icon = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-//                        Canvas(modifier = if (selected) Modifier //TODO: delete or fix
-//                            .fillMaxWidth()
-//                            .height(5.dp)
-//                            .padding(top = 0.dp, bottom = 50.dp)
-//                        else Modifier
-//                        ) {
-//                            drawLine(
-//                                color = Color.Black,
-//                                start = Offset(0f, 0f),
-//                                end = Offset(size.width, 0f),
-//                                strokeWidth = 2f
-//                            )
-//                        };
                         Icon(
                             imageVector = item.icon,
                             contentDescription = item.name,

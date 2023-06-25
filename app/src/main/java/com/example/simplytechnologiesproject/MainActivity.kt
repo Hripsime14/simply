@@ -6,8 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.magnifier
-import androidx.compose.material3.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,9 +29,7 @@ class MainActivity : ComponentActivity() {
         Box(
             modifier = modifier
         ) {
-            // A surface container using the 'background' color from the theme
             SetupBottomNavigation()
-            //AlertDialogSample()
         }
     }
 
@@ -45,7 +42,6 @@ class MainActivity : ComponentActivity() {
                     .fillMaxSize()
                     .background(Color.Yellow)
             ) {
-                // A surface container using the 'background' color from the theme
                 SetupBottomNavigation()
             }
         }
